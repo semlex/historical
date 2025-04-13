@@ -1,5 +1,6 @@
 {
   "name": "historical",
+  "homepage": "https://semlex.github.io/historical",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,7 +19,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,6 +45,7 @@
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.6",
+    "gh-pages": "^6.3.0",
     "prettier": "^3.5.3"
   },
   "includePaths": [
