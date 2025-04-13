@@ -58,15 +58,3 @@
     visibility: hidden;
   }
 }
-
-@include mobile {
-  .sliderWrapper {
-    :global(.swiper-slide) {
-      opacity: 0.4;
-    }
-
-    :global(.swiper-slide.swiper-slide-active) {
-      opacity: 1;
-    }
-  }
-}
