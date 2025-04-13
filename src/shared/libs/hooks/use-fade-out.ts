@@ -7,7 +7,7 @@ export const useFadeOut = <T>(ref: RefObject<HTMLElement | null>, deps: T) => {
 
     const fadeOut = gsap.to(ref.current, {
       opacity: 0,
-      duration: 0.3,
+      duration: 0.7,
       ease: 'power2.out',
     });
 

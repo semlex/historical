@@ -10,22 +10,14 @@ export const useFadeIn = <T>(ref: RefObject<HTMLElement | null>, deps: T) => {
       {
         opacity: 0,
         y: 20,
-        onStart: () => {
-          if (!ref.current) return;
-          ref.current.style.display = 'none';
-        },
       },
       {
         opacity: 1,
         y: 0,
         display: 'block',
-        duration: 0.4,
+        duration: 0.7,
         ease: 'power2.out',
         stagger: 0.05,
-        onStart: () => {
-          if (!ref.current) return;
-          ref.current.style.display = 'block';
-        },
       },
     );
   }, [deps]);
