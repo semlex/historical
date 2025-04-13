@@ -1,0 +1,83 @@
+@import '~app/mixins';
+
+.container {
+  max-width: 1440px;
+  padding: 0 80px;
+  padding-top: 1%;
+  margin: 0 auto;
+  border-left: 1px solid rgba(66, 86, 122, 0.1);
+  border-right: 1px solid rgba(66, 86, 122, 0.1);
+  position: relative;
+
+  @include mobile {
+    padding: 60px 20px;
+  }
+}
+
+.centerLineVertical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: rgba(66, 86, 122, 0.1);
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.centerLineHorizontal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: rgba(66, 86, 122, 0.1);
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.blockTitleWrapper {
+  margin-left: -1px;
+  margin-bottom: -75px;
+  pointer-events: none;
+
+  @include mobile {
+    margin: 0;
+  }
+}
+
+.selectIntervalWrapper {
+  margin: 0 auto;
+  margin-bottom: 56px;
+}
+
+// .circleTabsWrapper {
+//   margin: 0 auto;
+//   margin-bottom: 56px;
+// }
+
+.blockBottom {
+  width: 100%;
+  margin-top: -48px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+
+  @include mobile {
+    flex-direction: column-reverse;
+    gap: 80px;
+    margin: 0;
+    padding: 20px 0;
+    border-top: 1px solid #c7cdd9;
+  }
+}
+
+// .intervalNavWrapper {
+//   order: 0;
+
+//   @include mobile {
+//     order: 1;
+//   }
+// }
