@@ -1,0 +1,27 @@
+@import '~app/mixins';
+
+.event {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.title {
+  font-family: var(--second-family);
+  color: #3877ee;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 120%;
+}
+
+.text {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 150%;
+  color: #42567a;
+
+  @include mobile {
+    font-size: 14px;
+    line-height: 145%;
+  }
+}

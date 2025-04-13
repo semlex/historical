@@ -1,0 +1,72 @@
+@import '~app/mixins';
+
+.sliderWrapper {
+  margin: 0 auto;
+  width: 100%;
+  min-height: 150px;
+  position: relative;
+
+  :global(.swiper) {
+    margin: 0;
+    :global(.swiper-slide) {
+      max-width: 350px;
+
+      @include mobile {
+        max-width: 166px;
+      }
+    }
+  }
+
+  :global(.swiper-button-prev),
+  :global(.swiper-button-next) {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    border-radius: 100%;
+    background: #fff;
+    box-shadow: 0 0 15px 0 rgba(56, 119, 238, 0.1);
+    flex-shrink: 0;
+
+    .chevronIcon {
+      width: 8px;
+      height: 12px;
+    }
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  :global(.swiper-button-prev) {
+    left: -10px;
+    transform: translateX(-100%);
+  }
+
+  :global(.swiper-button-next) {
+    right: -10px;
+    transform: translateX(100%);
+  }
+
+  :global(.swiper-button-prev)::after,
+  :global(.swiper-button-next)::after {
+    content: '';
+  }
+
+  :global(.swiper-button-prev):global(.swiper-button-disabled),
+  :global(.swiper-button-next):global(.swiper-button-disabled) {
+    visibility: hidden;
+  }
+}
+
+@include mobile {
+  .sliderWrapper {
+    :global(.swiper-slide) {
+      opacity: 0.4;
+    }
+
+    :global(.swiper-slide.swiper-slide-active) {
+      opacity: 1;
+    }
+  }
+}
