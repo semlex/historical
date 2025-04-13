@@ -1,0 +1,32 @@
+@import '~app/mixins';
+
+.blockTitle {
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 120%;
+  color: #42567a;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80px;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(56, 119, 238, 1) 0%,
+      rgba(239, 93, 168, 1) 100%
+    );
+  }
+
+  @include mobile {
+    font-size: 20px;
+    background: none;
+
+    &::before {
+      display: none;
+    }
+  }
+}
