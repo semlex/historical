@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react';
-import { intervals } from 'entities/interval';
+import { intervals, IntervalTitle } from 'entities/interval';
 import { events, KeyEventsSlider } from 'entities/key-event';
 import { BlockTitle } from 'shared/ui';
 import { CircleTabs, IntervalNav } from 'features/select-interval';
 import { useCenter } from '../libs/hooks/use-center';
+import { useFadeIn, useFadeOut } from 'shared/libs';
 
 import styles from './historical-block.module.scss';
 
@@ -12,12 +13,16 @@ const HistoricalBlock = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
+  const keyEventsSliderWrapperRef = useRef<HTMLDivElement>(null);
 
   const center = useCenter(containerRef, circleRef);
 
   const filteredEvents = events.filter(
     (event) => event.intervalId === intervals[selectedIntervalIndex].id,
   );
+
+  useFadeOut(keyEventsSliderWrapperRef, filteredEvents);
+  useFadeIn(keyEventsSliderWrapperRef, filteredEvents);
 
   const handleIntervalSelect = (index: number) => {
     setSelectedIntervalIndex(index);
@@ -33,24 +38,34 @@ const HistoricalBlock = () => {
         className={styles.centerLineHorizontal}
         style={{ top: `${center.y}px` }}
       />
-      <div className={styles.blockTitleWrapper}>
-        <BlockTitle>
-          Исторические <br /> даты
-        </BlockTitle>
+      <div className={styles.blockTop}>
+        <div className={styles.blockTitleWrapper}>
+          <BlockTitle>
+            Исторические <br /> даты
+          </BlockTitle>
+        </div>
+        <CircleTabs
+          intervals={intervals}
+          selectedInterval={intervals[selectedIntervalIndex]}
+          onSelect={handleIntervalSelect}
+          circleRef={circleRef}
+        />
       </div>
-      <CircleTabs
-        intervals={intervals}
-        selectedInterval={intervals[selectedIntervalIndex]}
-        onSelect={handleIntervalSelect}
-        circleRef={circleRef}
-      />
-      <div className={styles.blockBottom}>
-        <div className={styles.intervalNavWrapper}>
-          <IntervalNav
-            activeIndex={selectedIntervalIndex}
-            length={intervals.length}
-            onSelect={handleIntervalSelect}
-          />
+      <div className={styles.intervalNavWrapper}>
+        <IntervalNav
+          activeIndex={selectedIntervalIndex}
+          length={intervals.length}
+          onSelect={handleIntervalSelect}
+        />
+      </div>
+      <div
+        ref={keyEventsSliderWrapperRef}
+        className={styles.keyEventsSliderWrapper}
+      >
+        <div className={styles.mobileIntervalTitle}>
+          <IntervalTitle>
+            {intervals[selectedIntervalIndex].title}
+          </IntervalTitle>
         </div>
         <KeyEventsSlider events={filteredEvents} />
       </div>

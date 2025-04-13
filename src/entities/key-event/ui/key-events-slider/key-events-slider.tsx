@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { useFadeOut } from '../../../../widgets/historical-block/libs/hooks/use-fade-out';
-import { useFadeIn } from '../../../../widgets/historical-block/libs/hooks/use-fade-in';
 import KeyEvent from '../key-event/key-event';
 import { KeyEvent as KeyEventType } from '../../model/types';
 

@@ -8,9 +8,13 @@
   border-left: 1px solid rgba(66, 86, 122, 0.1);
   border-right: 1px solid rgba(66, 86, 122, 0.1);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 
   @include mobile {
-    padding: 60px 20px;
+    padding: 60px 20px 15px 20px;
   }
 }
 
@@ -58,26 +62,49 @@
 //   margin-bottom: 56px;
 // }
 
+.blockTop {
+  display: flex;
+  flex-direction: column;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 56px;
+  }
+}
+
 .blockBottom {
   width: 100%;
   margin-top: -48px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 56px;
 
   @include mobile {
     flex-direction: column-reverse;
-    gap: 80px;
+    gap: 20%;
     margin: 0;
-    padding: 20px 0;
-    border-top: 1px solid #c7cdd9;
   }
 }
 
-// .intervalNavWrapper {
-//   order: 0;
+.keyEventsSliderWrapper {
+  .mobileIntervalTitle {
+    display: none;
+    border-bottom: 1px solid #c7cdd9;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 
-//   @include mobile {
-//     order: 1;
-//   }
-// }
+    @include mobile {
+      display: block;
+    }
+  }
+}
+
+.intervalNavWrapper {
+  margin-top: -48px;
+  margin-bottom: 56px;
+  @include mobile {
+    margin: 0;
+    order: 2;
+  }
+}
