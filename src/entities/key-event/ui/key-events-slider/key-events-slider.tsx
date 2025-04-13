@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { useFadeOut } from '../../lib/hooks/use-fade-out';
-import { useFadeIn } from '../../lib/hooks/use-fade-in';
+import { useFadeOut } from '../../../../widgets/historical-block/libs/hooks/use-fade-out';
+import { useFadeIn } from '../../../../widgets/historical-block/libs/hooks/use-fade-in';
 import KeyEvent from '../key-event/key-event';
 import { KeyEvent as KeyEventType } from '../../model/types';
 
@@ -16,12 +16,7 @@ type KeyEventsSliderProps = {
 };
 
 const KeyEventsSlider = ({ events }: KeyEventsSliderProps) => {
-  const [localEvents, setLocalEvents] = useState<KeyEventType[]>(events);
-  const wrapperRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperRef>(null);
-
-  useFadeOut(wrapperRef, events, () => setLocalEvents(events));
-  useFadeIn(wrapperRef, localEvents);
 
   useEffect(() => {
     if (swiperRef.current) {
@@ -30,7 +25,7 @@ const KeyEventsSlider = ({ events }: KeyEventsSliderProps) => {
   }, [events]);
 
   return (
-    <div className={styles.sliderWrapper} ref={wrapperRef}>
+    <div className={styles.sliderWrapper}>
       <div className="swiper-button-prev">
         <svg
           className={styles.chevronIcon}
@@ -49,6 +44,7 @@ const KeyEventsSlider = ({ events }: KeyEventsSliderProps) => {
         slideToClickedSlide
         modules={[Navigation]}
         slidesPerView="auto"
+        freeMode={true}
         grabCursor={true}
         spaceBetween={80}
         navigation={{
@@ -64,7 +60,7 @@ const KeyEventsSlider = ({ events }: KeyEventsSliderProps) => {
           },
         }}
       >
-        {localEvents.map((evt) => (
+        {events.map((evt) => (
           <SwiperSlide key={evt.id}>
             <KeyEvent event={evt} />
           </SwiperSlide>
