@@ -1,5 +1,5 @@
 import { useState, useEffect, RefObject } from 'react';
-import { Interval, IntervalBoundaries } from 'entities/interval';
+import { Interval, IntervalBoundaries, IntervalTitle } from 'entities/interval';
 
 import styles from './circle-tabs.module.scss';
 
@@ -77,7 +77,7 @@ const CircleTabs = ({
                   transform: `rotate(${-rotation - activeAngle - angle}deg) translate(46px, -50%)`,
                 }}
               >
-                {tab.title}
+                <IntervalTitle>{tab.title}</IntervalTitle>
               </div>
             </button>
           );

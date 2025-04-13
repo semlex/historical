@@ -9,7 +9,6 @@
   @include mobile {
     width: auto;
     height: auto;
-    padding: 56px 0;
   }
 
   .circle {
@@ -81,12 +80,8 @@
         top: 0;
         transform-origin: left top;
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.5);
         white-space: nowrap;
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 30px;
-        color: #42567a;
         pointer-events: none;
         transition:
           transform 0.7s ease-in-out,
