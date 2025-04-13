@@ -1,0 +1,96 @@
+@import '~app/mixins';
+
+.intervalNav {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @include mobile {
+      gap: 10px;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 16px;
+    @include mobile {
+      gap: 8px;
+    }
+  }
+
+  .circleButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    @include mobile {
+      width: 25px;
+      height: 25px;
+    }
+    padding: 0;
+    border-radius: 100%;
+    border: 1px solid rgba(66, 86, 122, 0.5);
+    background: transparent;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+
+    .iconMobile {
+      display: none;
+
+      @include mobile {
+        display: inline;
+      }
+    }
+
+    .iconDesktop {
+      display: inline;
+
+      @include mobile {
+        display: none;
+      }
+    }
+  }
+
+  .intervalCounter {
+    font-weight: 400;
+    font-size: 14px;
+    color: #42567a;
+  }
+
+  .dots {
+    display: none;
+    gap: 10px;
+    justify-content: center;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    @include mobile {
+      display: flex;
+    }
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #42567a;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+    cursor: pointer;
+  }
+
+  .dot.active {
+    opacity: 1;
+  }
+}
