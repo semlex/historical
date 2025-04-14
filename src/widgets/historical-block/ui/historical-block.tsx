@@ -11,7 +11,6 @@ import styles from './historical-block.module.scss';
 const HistoricalBlock = () => {
   const [selectedInterval, setSelectedInterval] = useState<Interval>();
   const [selectedIntervalIndex, setSelectedIntervalIndex] = useState(0);
-  const [isKeyEventsLoading, setIsKeyEventsLoading] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
@@ -31,21 +30,13 @@ const HistoricalBlock = () => {
   };
 
   const onRotateStart = () => {
-    setIsKeyEventsLoading(true);
+    keyEventsFadeOut();
   };
 
   const onRotateEnd = () => {
-    setIsKeyEventsLoading(false);
     setSelectedInterval(intervals[selectedIntervalIndex]);
+    keyEventsFadeIn();
   };
-
-  useEffect(() => {
-    if (isKeyEventsLoading) {
-      keyEventsFadeOut();
-    } else {
-      keyEventsFadeIn();
-    }
-  }, [isKeyEventsLoading]);
 
   return (
     <div className={styles.container} ref={containerRef}>
