@@ -32,33 +32,46 @@ const CircleTabs = ({
   );
 
   const rotateTo = (newIndex: number) => {
+    if (!circleRef?.current) return;
+
     onRotateStart && onRotateStart();
 
     let delta = newIndex - activeIndex;
     if (delta > intervals.length / 2) delta -= intervals.length;
     if (delta < -intervals.length / 2) delta += intervals.length;
 
-    setRotation((prev) => prev - delta * anglePerTab);
+    setRotation((prev) => {
+      const newRotation = prev - delta * anglePerTab;
+
+      gsap.to(circleRef.current, {
+        rotation: newRotation + activeAngle,
+        duration: 0.7,
+        ease: 'power1.inOut',
+        onStart: () => setIsRotating(true),
+        onComplete: () => {
+          setIsRotating(false);
+          onRotateEnd && onRotateEnd();
+        },
+      });
+
+      return newRotation;
+    });
+
     setActiveIndex(newIndex);
     onSelect(newIndex);
   };
 
   useEffect(() => {
     if (circleRef?.current) {
-      gsap.to(circleRef.current, {
-        rotation: rotation + activeAngle,
-        duration: 0.7,
-        ease: 'power1.inOut',
-        onStart: () => {
-          setIsRotating(true);
-        },
-        onComplete: () => {
-          setIsRotating(false);
-          onRotateEnd && onRotateEnd();
-        },
+      const initialRotation = -activeIndex * anglePerTab;
+
+      gsap.set(circleRef.current, {
+        rotation: initialRotation + activeAngle,
       });
+
+      setRotation(initialRotation);
     }
-  }, [rotation]);
+  }, [circleRef]);
 
   useEffect(() => {
     const newIndex = intervals.findIndex((i) => i.id === selectedInterval.id);

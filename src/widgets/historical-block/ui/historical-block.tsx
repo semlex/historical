@@ -9,8 +9,10 @@ import { useFadeIn, useFadeOut } from 'shared/libs';
 import styles from './historical-block.module.scss';
 
 const HistoricalBlock = () => {
-  const [selectedInterval, setSelectedInterval] = useState<Interval>();
   const [selectedIntervalIndex, setSelectedIntervalIndex] = useState(0);
+  const [selectedInterval, setSelectedInterval] = useState<Interval>(
+    intervals[0],
+  );
 
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
