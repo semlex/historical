@@ -2,18 +2,17 @@
 
 .container {
   max-width: 1440px;
-  padding: 0 80px;
-  padding-top: 1%;
+  padding: 5% 80px 2% 80px;
   margin: 0 auto;
   border-left: 1px solid rgba(66, 86, 122, 0.1);
   border-right: 1px solid rgba(66, 86, 122, 0.1);
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100vh;
 
   @include mobile {
+    justify-content: space-between;
     padding: 60px 20px 15px 20px;
   }
 }

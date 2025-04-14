@@ -1,5 +1,6 @@
 import { useState, useEffect, RefObject } from 'react';
 import { Interval, IntervalBoundaries, IntervalTitle } from 'entities/interval';
+import gsap from 'gsap';
 
 import styles from './circle-tabs.module.scss';
 
@@ -8,6 +9,8 @@ type CircleTabsProps = {
   selectedInterval: Interval;
   onSelect: (interval: number) => void;
   circleRef?: RefObject<HTMLDivElement | null>;
+  onRotateStart?: () => void;
+  onRotateEnd?: () => void;
 };
 
 const CircleTabs = ({
@@ -15,17 +18,22 @@ const CircleTabs = ({
   selectedInterval,
   onSelect,
   circleRef,
+  onRotateStart,
+  onRotateEnd,
 }: CircleTabsProps) => {
+  const anglePerTab = 360 / intervals.length;
+  const activeAngle = -60;
+  const radius = 265;
+
+  const [rotation, setRotation] = useState(0);
+  const [isRotating, setIsRotating] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState(
     intervals.findIndex((i) => i.id === selectedInterval.id),
   );
-  const [rotation, setRotation] = useState(0);
-
-  const anglePerTab = 360 / intervals.length;
-  const activeAngle = -60;
-  const radius = 200;
 
   const rotateTo = (newIndex: number) => {
+    onRotateStart && onRotateStart();
+
     let delta = newIndex - activeIndex;
     if (delta > intervals.length / 2) delta -= intervals.length;
     if (delta < -intervals.length / 2) delta += intervals.length;
@@ -34,6 +42,23 @@ const CircleTabs = ({
     setActiveIndex(newIndex);
     onSelect(newIndex);
   };
+
+  useEffect(() => {
+    if (circleRef?.current) {
+      gsap.to(circleRef.current, {
+        rotation: rotation + activeAngle,
+        duration: 0.7,
+        ease: 'power1.inOut',
+        onStart: () => {
+          setIsRotating(true);
+        },
+        onComplete: () => {
+          setIsRotating(false);
+          onRotateEnd && onRotateEnd();
+        },
+      });
+    }
+  }, [rotation]);
 
   useEffect(() => {
     const newIndex = intervals.findIndex((i) => i.id === selectedInterval.id);
@@ -47,7 +72,7 @@ const CircleTabs = ({
     <div className={styles.circleTabs}>
       <div
         className={styles.circle}
-        style={{ transform: `rotate(${rotation + activeAngle}deg)` }}
+        // style={{ transform: `rotate(${rotation + activeAngle}deg)` }}
         ref={circleRef}
       >
         {intervals.map((tab, index) => {
@@ -72,7 +97,7 @@ const CircleTabs = ({
                 </span>
               </div>
               <div
-                className={styles.tabTitle}
+                className={`${styles.tabTitle} ${activeIndex === index && !isRotating ? styles.active : ''}`}
                 style={{
                   transform: `rotate(${-rotation - activeAngle - angle}deg) translate(46px, -50%)`,
                 }}

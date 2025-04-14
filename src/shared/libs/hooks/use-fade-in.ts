@@ -1,24 +1,23 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject } from 'react';
 import gsap from 'gsap';
 
-export const useFadeIn = <T>(ref: RefObject<HTMLElement | null>, deps: T) => {
-  useEffect(() => {
+export const useFadeIn = (ref: RefObject<HTMLElement | null>) => {
+  return () => {
     if (!ref.current) return;
 
     gsap.fromTo(
       ref.current,
       {
         opacity: 0,
-        y: 20,
+        y: 10,
       },
       {
         opacity: 1,
         y: 0,
-        display: 'block',
-        duration: 0.7,
-        ease: 'power2.out',
+        duration: 0.25,
+        ease: 'power1.inOut',
         stagger: 0.05,
       },
     );
-  }, [deps]);
+  };
 };

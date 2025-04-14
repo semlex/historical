@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { intervals, IntervalTitle } from 'entities/interval';
+import { useState, useRef, useEffect } from 'react';
+import { Interval, intervals, IntervalTitle } from 'entities/interval';
 import { events, KeyEventsSlider } from 'entities/key-event';
 import { BlockTitle } from 'shared/ui';
 import { CircleTabs, IntervalNav } from 'features/select-interval';
@@ -9,7 +9,9 @@ import { useFadeIn, useFadeOut } from 'shared/libs';
 import styles from './historical-block.module.scss';
 
 const HistoricalBlock = () => {
+  const [selectedInterval, setSelectedInterval] = useState<Interval>();
   const [selectedIntervalIndex, setSelectedIntervalIndex] = useState(0);
+  const [isKeyEventsLoading, setIsKeyEventsLoading] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
@@ -17,16 +19,33 @@ const HistoricalBlock = () => {
 
   const center = useCenter(containerRef, circleRef);
 
-  const filteredEvents = events.filter(
-    (event) => event.intervalId === intervals[selectedIntervalIndex].id,
-  );
+  const keyEventsFadeOut = useFadeOut(keyEventsSliderWrapperRef);
+  const keyEventsFadeIn = useFadeIn(keyEventsSliderWrapperRef);
 
-  useFadeOut(keyEventsSliderWrapperRef, filteredEvents);
-  useFadeIn(keyEventsSliderWrapperRef, filteredEvents);
+  const filteredEvents = events.filter(
+    (event) => event.intervalId === selectedInterval?.id,
+  );
 
   const handleIntervalSelect = (index: number) => {
     setSelectedIntervalIndex(index);
   };
+
+  const onRotateStart = () => {
+    setIsKeyEventsLoading(true);
+  };
+
+  const onRotateEnd = () => {
+    setIsKeyEventsLoading(false);
+    setSelectedInterval(intervals[selectedIntervalIndex]);
+  };
+
+  useEffect(() => {
+    if (isKeyEventsLoading) {
+      keyEventsFadeOut();
+    } else {
+      keyEventsFadeIn();
+    }
+  }, [isKeyEventsLoading]);
 
   return (
     <div className={styles.container} ref={containerRef}>
@@ -49,6 +68,8 @@ const HistoricalBlock = () => {
           selectedInterval={intervals[selectedIntervalIndex]}
           onSelect={handleIntervalSelect}
           circleRef={circleRef}
+          onRotateStart={onRotateStart}
+          onRotateEnd={onRotateEnd}
         />
       </div>
       <div className={styles.intervalNavWrapper}>
@@ -63,9 +84,7 @@ const HistoricalBlock = () => {
         className={styles.keyEventsSliderWrapper}
       >
         <div className={styles.mobileIntervalTitle}>
-          <IntervalTitle>
-            {intervals[selectedIntervalIndex].title}
-          </IntervalTitle>
+          <IntervalTitle>{selectedInterval?.title}</IntervalTitle>
         </div>
         <KeyEventsSlider events={filteredEvents} />
       </div>
