@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useAnimateNumber } from '../../libs/hooks/use-animate-number';
+import { useAnimateNumber } from 'shared/libs';
 
 import styles from './interval-boundaries.module.scss';
 
