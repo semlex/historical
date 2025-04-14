@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Interval, intervals, IntervalTitle } from 'entities/interval';
 import { events, KeyEventsSlider } from 'entities/key-event';
 import { BlockTitle } from 'shared/ui';
