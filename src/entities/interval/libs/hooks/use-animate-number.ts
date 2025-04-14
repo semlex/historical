@@ -13,7 +13,7 @@ export const useAnimateNumber = (
 
       gsap.to(obj, {
         val: value,
-        duration: 0.3,
+        duration: 0.4,
         ease: 'none',
         onUpdate: () => {
           if (ref.current) {
