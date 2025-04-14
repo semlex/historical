@@ -83,11 +83,7 @@ const CircleTabs = ({
 
   return (
     <div className={styles.circleTabs}>
-      <div
-        className={styles.circle}
-        // style={{ transform: `rotate(${rotation + activeAngle}deg)` }}
-        ref={circleRef}
-      >
+      <div className={styles.circle} ref={circleRef}>
         {intervals.map((tab, index) => {
           const angle = index * anglePerTab;
           return (
