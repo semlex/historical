@@ -21,10 +21,6 @@ const HistoricalBlock = () => {
   const keyEventsFadeOut = useFadeOut(keyEventsSliderWrapperRef);
   const keyEventsFadeIn = useFadeIn(keyEventsSliderWrapperRef);
 
-  const filteredEvents = events.filter(
-    (event) => event.intervalId === selectedInterval?.id,
-  );
-
   const handleIntervalSelect = (index: number) => {
     setSelectedIntervalIndex(index);
   };
@@ -37,6 +33,10 @@ const HistoricalBlock = () => {
     setSelectedInterval(intervals[selectedIntervalIndex]);
     keyEventsFadeIn();
   };
+
+  const filteredEvents = events.filter(
+    (event) => event.intervalId === selectedInterval?.id,
+  );
 
   return (
     <div className={styles.container} ref={containerRef}>
