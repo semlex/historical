@@ -1,0 +1,13 @@
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #42567a;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+  cursor: pointer;
+
+  &.active {
+    opacity: 1;
+  }
+}

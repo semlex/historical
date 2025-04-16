@@ -1,3 +1,5 @@
+import { Dot } from 'shared/ui';
+
 import styles from './interval-nav.module.scss';
 
 type IntervalNavProps = {
@@ -101,9 +103,9 @@ const IntervalNav = ({ activeIndex, length, onSelect }: IntervalNavProps) => {
       </div>
       <div className={styles.dots}>
         {Array.from({ length }).map((_, i) => (
-          <span
+          <Dot
             key={i}
-            className={`${styles.dot} ${i === activeIndex ? styles.active : ''}`}
+            isActive={i === activeIndex}
             onClick={() => onSelect(i)}
           />
         ))}
