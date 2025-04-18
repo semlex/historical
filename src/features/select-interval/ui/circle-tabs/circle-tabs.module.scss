@@ -39,12 +39,10 @@
       border: none;
 
       .dot {
+        @include flex-center;
         position: absolute;
         top: 0;
         left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         cursor: pointer;
         width: 6px;
         height: 6px;
