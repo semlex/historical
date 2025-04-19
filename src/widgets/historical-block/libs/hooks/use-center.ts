@@ -20,7 +20,7 @@ export const useCenter = (
 
       setCenter({ x: centerX, y: centerY });
     }
-  }, 50);
+  }, 250);
 
   useEffect(() => {
     updateCenter();
