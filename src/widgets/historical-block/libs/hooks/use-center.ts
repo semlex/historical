@@ -1,4 +1,5 @@
 import { useState, useEffect, RefObject } from 'react';
+import throttle from 'lodash.throttle';
 
 export const useCenter = (
   containerRef: RefObject<HTMLElement | null>,
@@ -6,7 +7,8 @@ export const useCenter = (
 ) => {
   const [center, setCenter] = useState({ x: 0, y: 0 });
 
-  const updateCenter = () => {
+  const updateCenter = throttle(() => {
+    console.log('resize');
     if (containerRef.current && elementRef.current) {
       const containerRect = containerRef.current.getBoundingClientRect();
       const elementRect = elementRef.current.getBoundingClientRect();
@@ -18,7 +20,7 @@ export const useCenter = (
 
       setCenter({ x: centerX, y: centerY });
     }
-  };
+  }, 50);
 
   useEffect(() => {
     updateCenter();
