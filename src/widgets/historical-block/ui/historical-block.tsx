@@ -27,11 +27,11 @@ const HistoricalBlock = () => {
     setSelectedIntervalIndex(index);
   };
 
-  const onRotateStart = () => {
+  const handleRotateStart = () => {
     keyEventsFadeOut();
   };
 
-  const onRotateEnd = () => {
+  const handleRotateEnd = () => {
     setSelectedInterval(intervals[selectedIntervalIndex]);
     keyEventsFadeIn();
   };
@@ -61,8 +61,8 @@ const HistoricalBlock = () => {
           selectedInterval={intervals[selectedIntervalIndex]}
           onSelect={handleIntervalSelect}
           circleRef={circleRef}
-          onRotateStart={onRotateStart}
-          onRotateEnd={onRotateEnd}
+          onRotateStart={handleRotateStart}
+          onRotateEnd={handleRotateEnd}
         />
       </div>
       <div className={styles.intervalNavWrapper}>
