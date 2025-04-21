@@ -57,10 +57,10 @@ const HistoricalBlock = () => {
           </BlockTitle>
         </div>
         <CircleTabs
+          circleRef={circleRef}
           intervals={intervals}
           selectedInterval={intervals[selectedIntervalIndex]}
           onSelect={handleIntervalSelect}
-          circleRef={circleRef}
           onRotateStart={handleRotateStart}
           onRotateEnd={handleRotateEnd}
         />
