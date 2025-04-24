@@ -11,7 +11,7 @@ import styles from './historical-block.module.scss';
 const HistoricalBlock = () => {
   const [selectedIntervalIndex, setSelectedIntervalIndex] = useState(0);
   const [selectedInterval, setSelectedInterval] = useState<Interval>(
-    intervals[0],
+    intervals[selectedIntervalIndex],
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
