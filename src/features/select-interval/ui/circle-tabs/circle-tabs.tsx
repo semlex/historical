@@ -7,6 +7,7 @@ import styles from './circle-tabs.module.scss';
 type CircleTabsProps = {
   intervals: Interval[];
   selectedInterval: Interval;
+  selectedIntervalIndex: number;
   onSelect: (interval: number) => void;
   circleRef?: RefObject<HTMLDivElement | null>;
   onRotateStart?: () => void;
@@ -16,6 +17,7 @@ type CircleTabsProps = {
 const CircleTabs = ({
   intervals,
   selectedInterval,
+  selectedIntervalIndex,
   onSelect,
   circleRef,
   onRotateStart,
@@ -27,9 +29,7 @@ const CircleTabs = ({
 
   const [rotation, setRotation] = useState(0);
   const [isRotating, setIsRotating] = useState<boolean>(false);
-  const [activeIndex, setActiveIndex] = useState(
-    intervals.findIndex((i) => i.id === selectedInterval.id),
-  );
+  const [activeIndex, setActiveIndex] = useState(selectedIntervalIndex);
 
   const rotateTo = (newIndex: number) => {
     if (!circleRef?.current) return;

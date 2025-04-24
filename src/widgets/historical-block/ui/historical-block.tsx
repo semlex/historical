@@ -60,6 +60,7 @@ const HistoricalBlock = () => {
           circleRef={circleRef}
           intervals={intervals}
           selectedInterval={intervals[selectedIntervalIndex]}
+          selectedIntervalIndex={selectedIntervalIndex}
           onSelect={handleIntervalSelect}
           onRotateStart={handleRotateStart}
           onRotateEnd={handleRotateEnd}
