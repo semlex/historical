@@ -1,6 +1,6 @@
-import React from 'react';
-import './App.css';
 import { HistoricalBlock } from 'widgets/historical-block';
+
+import './App.css';
 
 function App() {
   return (
