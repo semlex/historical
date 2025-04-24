@@ -15,6 +15,9 @@ const IntervalBoundaries = ({
   const startRef = useRef<HTMLSpanElement>(null);
   const endRef = useRef<HTMLSpanElement>(null);
 
+  useAnimateNumber(startYear, startRef);
+  useAnimateNumber(endYear, endRef);
+
   useEffect(() => {
     if (startRef.current) {
       startRef.current.textContent = startYear.toString();
@@ -23,9 +26,6 @@ const IntervalBoundaries = ({
       endRef.current.textContent = endYear.toString();
     }
   }, [startRef, endRef]);
-
-  useAnimateNumber(startYear, startRef);
-  useAnimateNumber(endYear, endRef);
 
   return (
     <div className={styles.years}>
