@@ -59,7 +59,6 @@ const HistoricalBlock = () => {
         <CircleTabs
           circleRef={circleRef}
           intervals={intervals}
-          selectedInterval={intervals[selectedIntervalIndex]}
           selectedIntervalIndex={selectedIntervalIndex}
           onSelect={handleIntervalSelect}
           onRotateStart={handleRotateStart}

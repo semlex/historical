@@ -9,7 +9,6 @@ const RADIUS = 265;
 
 type CircleTabsProps = {
   intervals: Interval[];
-  selectedInterval: Interval;
   selectedIntervalIndex: number;
   onSelect: (interval: number) => void;
   circleRef?: RefObject<HTMLDivElement | null>;
@@ -19,7 +18,6 @@ type CircleTabsProps = {
 
 const CircleTabs = ({
   intervals,
-  selectedInterval,
   selectedIntervalIndex,
   onSelect,
   circleRef,
@@ -75,12 +73,10 @@ const CircleTabs = ({
   }, [circleRef]);
 
   useEffect(() => {
-    const newIndex = intervals.findIndex((i) => i.id === selectedInterval.id);
-
-    if (newIndex !== activeIndex) {
-      rotateTo(newIndex);
+    if (selectedIntervalIndex !== activeIndex) {
+      rotateTo(selectedIntervalIndex);
     }
-  }, [selectedInterval]);
+  }, [selectedIntervalIndex]);
 
   return (
     <div className={styles.circleTabs}>
