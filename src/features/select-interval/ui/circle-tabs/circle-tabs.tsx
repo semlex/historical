@@ -4,6 +4,9 @@ import gsap from 'gsap';
 
 import styles from './circle-tabs.module.scss';
 
+const ACTIVE_ANGLE = -60;
+const RADIUS = 265;
+
 type CircleTabsProps = {
   intervals: Interval[];
   selectedInterval: Interval;
@@ -24,8 +27,6 @@ const CircleTabs = ({
   onRotateEnd,
 }: CircleTabsProps) => {
   const anglePerTab = 360 / intervals.length;
-  const activeAngle = -60;
-  const radius = 265;
 
   const [rotation, setRotation] = useState(0);
   const [isRotating, setIsRotating] = useState<boolean>(false);
@@ -44,7 +45,7 @@ const CircleTabs = ({
       const newRotation = prev - delta * anglePerTab;
 
       gsap.to(circleRef.current, {
-        rotation: newRotation + activeAngle,
+        rotation: newRotation + ACTIVE_ANGLE,
         duration: 0.7,
         ease: 'power1.inOut',
         onStart: () => setIsRotating(true),
@@ -66,7 +67,7 @@ const CircleTabs = ({
       const initialRotation = -activeIndex * anglePerTab;
 
       gsap.set(circleRef.current, {
-        rotation: initialRotation + activeAngle,
+        rotation: initialRotation + ACTIVE_ANGLE,
       });
 
       setRotation(initialRotation);
@@ -92,14 +93,14 @@ const CircleTabs = ({
               className={`${styles.tab} ${activeIndex === index ? styles.active : ''}`}
               onClick={() => rotateTo(index)}
               style={{
-                transform: `rotate(${angle}deg) translate(${radius}px)`,
+                transform: `rotate(${angle}deg) translate(${RADIUS}px)`,
               }}
             >
               <div className={styles.dot}>
                 <span
                   className={styles.tabNumber}
                   style={{
-                    transform: `rotate(${-rotation - activeAngle - angle}deg)`,
+                    transform: `rotate(${-rotation - ACTIVE_ANGLE - angle}deg)`,
                   }}
                 >
                   {index + 1}
@@ -108,7 +109,7 @@ const CircleTabs = ({
               <div
                 className={`${styles.tabTitle} ${activeIndex === index && !isRotating ? styles.active : ''}`}
                 style={{
-                  transform: `rotate(${-rotation - activeAngle - angle}deg) translate(46px, -50%)`,
+                  transform: `rotate(${-rotation - ACTIVE_ANGLE - angle}deg) translate(46px, -50%)`,
                 }}
               >
                 <IntervalTitle>{tab.title}</IntervalTitle>
