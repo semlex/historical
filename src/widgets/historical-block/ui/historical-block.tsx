@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { Interval, intervals, IntervalTitle } from 'entities/interval';
 import { events, KeyEventsSlider } from 'entities/key-event';
-import { BlockTitle } from 'shared/ui';
+import { BlockTitle, LineHorizontal, LineVertical } from 'shared/ui';
 import { CircleTabs, IntervalNav } from 'features/select-interval';
 import { useCenter } from '../libs/hooks/use-center';
 import { useFadeIn, useFadeOut } from 'shared/libs';
@@ -42,11 +42,11 @@ const HistoricalBlock = () => {
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <div
+      <LineVertical
         className={styles.centerLineVertical}
         style={{ left: `${center.x}px` }}
       />
-      <div
+      <LineHorizontal
         className={styles.centerLineHorizontal}
         style={{ top: `${center.y}px` }}
       />
