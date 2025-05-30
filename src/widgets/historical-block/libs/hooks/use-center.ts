@@ -8,7 +8,6 @@ export const useCenter = (
   const [center, setCenter] = useState({ x: 0, y: 0 });
 
   const updateCenter = throttle(() => {
-    console.log('resize');
     if (containerRef.current && elementRef.current) {
       const containerRect = containerRef.current.getBoundingClientRect();
       const elementRect = elementRef.current.getBoundingClientRect();
