@@ -9,7 +9,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
 
   @include mobile {
     justify-content: space-between;
